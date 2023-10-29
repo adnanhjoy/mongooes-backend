@@ -67,4 +67,25 @@ productRouter.post('/product', async (req, res) => {
     }
 })
 
+
+//update product
+
+productRouter.put('/product/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updateProduct = await Product.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (updateProduct) {
+            res.status(200).send({
+                success: true,
+                data: updateProduct
+            })
+        } else {
+            res.status(404).send({ message: "Product not update" });
+        }
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+})
+
 module.exports = productRouter;

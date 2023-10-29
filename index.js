@@ -54,15 +54,17 @@ app.get('/product', async (req, res) => {
             products = await Product.find({
                 $and: [
                     { price: { $gt: price } },
-                    { rating: { $gte: rating } }]
+                    { rating: { $gte: rating } }
+                ]
             });
 
             totalProduct = await Product.find({
                 $and: [
                     { price: { $gt: price } },
-                    { rating: { $gte: rating } }]
+                    { rating: { $gte: rating } }
+                ]
             }).countDocuments();
-            
+
         } else {
             products = await Product.find();
             totalProduct = await Product.find().countDocuments();

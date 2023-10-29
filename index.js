@@ -1,5 +1,6 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
+const jwt = require('jsonwebtoken');
 const productRouter = require('./router/productRouter');
 const categoryRouter = require('./router/categoryRouter');
 const app = express();
@@ -23,6 +24,15 @@ const connectDB = async () => {
 
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
+
+
+app.post('/jwt', (req, res) => {
+    const token = jwt.sign({
+        data: 'adnan@gmail.com'
+    }, process.env.ACCESS_TOKEN, { expiresIn: '1h' })
+    res.send(token)
+    console.log(token)
+})
 
 //call database
 connectDB();

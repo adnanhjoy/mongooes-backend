@@ -17,7 +17,7 @@ productRouter.get('/product', async (req, res) => {
                     { price: { $gt: price } },
                     { rating: { $gte: rating } }
                 ]
-            });
+            }).sort({ date: -1 });
 
             totalProduct = await Product.find({
                 $and: [
@@ -27,7 +27,7 @@ productRouter.get('/product', async (req, res) => {
             }).countDocuments();
 
         } else {
-            products = await Product.find();
+            products = await Product.find().sort({ date: -1 });
             totalProduct = await Product.find().countDocuments();
         }
 

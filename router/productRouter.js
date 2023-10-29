@@ -45,6 +45,25 @@ productRouter.get('/product', async (req, res) => {
     }
 })
 
+//get single product
+
+productRouter.get('/product/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const getSingleData = await Product.findOne({ _id: id });
+        if (getSingleData) {
+            res.status(200).send({
+                succes: true,
+                data: getSingleData
+            })
+        } else {
+            res.status(404).send({ message: "Product not found" });
+        }
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+})
+
 
 //post product
 
@@ -82,6 +101,23 @@ productRouter.put('/product/:id', async (req, res) => {
             })
         } else {
             res.status(404).send({ message: "Product not update" });
+        }
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+})
+
+
+//delete product
+productRouter.delete('/product/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleteProduct = await Product.findByIdAndDelete(id);
+
+        if (deleteProduct) {
+            res.status(200).send("Succesully deleted");
+        } else {
+            res.status(404).send({ message: "Product not deleted" });
         }
     } catch (error) {
         res.status(500).send({ message: error.message })

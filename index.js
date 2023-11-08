@@ -3,6 +3,7 @@ const { default: mongoose } = require('mongoose');
 const jwt = require('jsonwebtoken');
 const productRouter = require('./router/productRouter');
 const categoryRouter = require('./router/categoryRouter');
+const cartRouter = require('./router/cartRouter');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -24,6 +25,7 @@ const connectDB = async () => {
 
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
+app.use('/api', cartRouter);
 
 
 app.post('/jwt', (req, res) => {

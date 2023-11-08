@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const productRouter = require('./router/productRouter');
 const categoryRouter = require('./router/categoryRouter');
 const cartRouter = require('./router/cartRouter');
+const signupRouter = require('./router/signupRouter');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -26,6 +27,7 @@ const connectDB = async () => {
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api', cartRouter);
+app.use('/api', signupRouter);
 
 
 app.post('/jwt', (req, res) => {

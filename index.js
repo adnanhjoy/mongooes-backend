@@ -1,14 +1,13 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
-const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const router = require('./router');
-const app = express();
-dotenv.config()
 const port = process.env.PORT || 5000;
 
 //middleware
+const app = express();
 app.use(express.json());
+dotenv.config()
 
 // db connect
 const connectDB = async () => {

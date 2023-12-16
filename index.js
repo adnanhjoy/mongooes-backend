@@ -5,6 +5,9 @@ const productRouter = require('./router/productRouter');
 const categoryRouter = require('./router/categoryRouter');
 const cartRouter = require('./router/cartRouter');
 const userRouter = require('./router/userRouter');
+const dotenv = require('dotenv');
+
+dotenv.config()
 const app = express();
 const port = process.env.PORT || 5000;
 

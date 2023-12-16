@@ -1,8 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../schema/userSchema');
+const User = require('../model/userSchema');
 const userRouter = express.Router();
+
 
 userRouter.post('/signup', async (req, res) => {
     try {
@@ -28,13 +29,15 @@ userRouter.post('/login', async (req, res) => {
     try {
         const user = await User.find({ email: req.body.email });
         if (user && user.length > 0) {
-            const isValidPassword = await bcrypt.compare(req.body.password, user[0].password);
+            const isValidPassword = await bcrypt.compare(req?.body?.password, user[0]?.password);
+
             if (isValidPassword) {
-                const token = jwt.sign({
+                let token = jwt.sign({
                     userId: user[0]._id,
                     username: user[0].username,
                     email: user[0].email,
                 }, process.env.ACCESS_TOKEN, { expiresIn: '1h' })
+
                 res.status(200).json({
                     "access_token": token,
                     "message": "Login Successfull"
@@ -51,7 +54,7 @@ userRouter.post('/login', async (req, res) => {
         }
     } catch (error) {
         res.status(401).json({
-            message: "Authentication failed"
+            message: error.message
         })
     }
 })

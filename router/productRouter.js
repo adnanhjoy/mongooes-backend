@@ -1,5 +1,5 @@
 const experss = require('express');
-const Product = require('../schema/productSchema');
+const Product = require('../model/productSchema');
 const productRouter = experss.Router();
 
 //get product

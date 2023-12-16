@@ -1,6 +1,6 @@
 const express = require('express');
-const Category = require('../schema/categortSchema');
-const SubCategory = require('../schema/subCategorySchema');
+const Category = require('../model/categortSchema');
+const SubCategory = require('../model/subCategorySchema');
 const categoryRouter = express.Router();
 
 

@@ -1,14 +1,10 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const jwt = require('jsonwebtoken');
-const productRouter = require('./router/productRouter');
-const categoryRouter = require('./router/categoryRouter');
-const cartRouter = require('./router/cartRouter');
-const userRouter = require('./router/userRouter');
 const dotenv = require('dotenv');
-
-dotenv.config()
+const router = require('./router');
 const app = express();
+dotenv.config()
 const port = process.env.PORT || 5000;
 
 //middleware
@@ -25,21 +21,8 @@ const connectDB = async () => {
     }
 }
 
-//router
+app.use('/api', router)
 
-app.use('/api', productRouter);
-app.use('/api', categoryRouter);
-app.use('/api', cartRouter);
-app.use('/api', userRouter);
-
-
-app.post('/jwt', (req, res) => {
-    const token = jwt.sign({
-        data: 'adnan@gmail.com'
-    }, process.env.ACCESS_TOKEN, { expiresIn: '1h' })
-    res.send(token)
-    console.log(token)
-})
 
 //call database
 connectDB();

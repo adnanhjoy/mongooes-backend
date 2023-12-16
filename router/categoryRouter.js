@@ -6,7 +6,7 @@ const categoryRouter = express.Router();
 
 // category post
 
-categoryRouter.post('/category', async (req, res) => {
+categoryRouter.post('/', async (req, res) => {
     try {
         const mainCategory = new Category({
             ...req.body
@@ -41,7 +41,7 @@ categoryRouter.post('/category', async (req, res) => {
 
 // category get
 
-categoryRouter.get('/category', async (req, res) => {
+categoryRouter.get('/', async (req, res) => {
     try {
         const categories = await Category.find();
         if (categories) {

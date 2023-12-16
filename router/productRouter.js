@@ -4,7 +4,7 @@ const productRouter = experss.Router();
 
 //get product
 
-productRouter.get('/product', async (req, res) => {
+productRouter.get('/', async (req, res) => {
     try {
         const price = req.query.price;
         const rating = req.query.rating;
@@ -47,7 +47,7 @@ productRouter.get('/product', async (req, res) => {
 
 //get single product
 
-productRouter.get('/product/:id', async (req, res) => {
+productRouter.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const getSingleData = await Product.findOne({ _id: id });
@@ -67,7 +67,7 @@ productRouter.get('/product/:id', async (req, res) => {
 
 //post product
 
-productRouter.post('/product', async (req, res) => {
+productRouter.post('/', async (req, res) => {
     try {
         const setProduct = new Product({
             ...req.body
@@ -89,7 +89,7 @@ productRouter.post('/product', async (req, res) => {
 
 //update product
 
-productRouter.put('/product/:id', async (req, res) => {
+productRouter.put('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updateProduct = await Product.findByIdAndUpdate(id, req.body, { new: true });
@@ -109,7 +109,7 @@ productRouter.put('/product/:id', async (req, res) => {
 
 
 //delete product
-productRouter.delete('/product/:id', async (req, res) => {
+productRouter.delete('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const deleteProduct = await Product.findByIdAndDelete(id);
